@@ -27,6 +27,11 @@ export function createElement(name, props = {}, ...children) {
   return element
 }
 
+/**
+ * Проверка склонения
+ * @param quantity {Number} Количество вызовов
+ * @returns {String}
+ */
 export function declination(quantity) {
   const outputString =
     quantity === 2 || quantity === 3 || quantity === 4

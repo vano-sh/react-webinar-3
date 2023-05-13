@@ -5,6 +5,7 @@ import Store from './store.js'
 
 const store = new Store({
   list: [
+    // добавил дополнительные свойства "selected" и "call"
     { code: 1, title: 'Название элемента', selected: false, call: 0 },
     { code: 2, title: 'Некий объект', selected: false, call: 0 },
     { code: 3, title: 'Заголовок', selected: false, call: 0 },

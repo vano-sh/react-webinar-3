@@ -30,6 +30,7 @@ function App({ store }) {
                 <div className='Item-title'>
                   {item.title}
 
+                  {/* Проверка количества выбора, если больше 0, то выводим текст */}
                   {item.call > 0 && (
                     <span> | Выделяли {declination(item.call)}</span>
                   )}

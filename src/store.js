@@ -42,11 +42,11 @@ class Store {
    * Добавление новой записи
    */
   addItem() {
+    // Создание уникального id
     let id = 0
-
     do {
       id = Math.round(Math.random() * 100)
-    } while (this.state.list.some((item) => item.code === id))
+    } while (this.state.list.some((item) => item.code === id)) // Проверка на наличие id в имеющемся списке, если есть то генерируем заново
 
     this.setState({
       ...this.state,
@@ -74,8 +74,9 @@ class Store {
       ...this.state,
       list: this.state.list.map((item) => {
         if (item.code === code && !item.selected) {
+          // Проверяем id и выделен ли элемент
           item.selected = true
-          item.call += 1
+          item.call += 1 // увеличиваем счетчик
         } else item.selected = false
 
         return item

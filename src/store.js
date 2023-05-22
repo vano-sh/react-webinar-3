@@ -1,4 +1,4 @@
-import { recalculationResults } from './utils'
+import { recalculationAmount } from './utils'
 
 /**
  * Хранилище состояния приложения
@@ -54,14 +54,14 @@ class Store {
         ...this.state,
         cart: this.state.cart.map((elem) => {
           if (elem.code === item.code) {
-            return { ...item, quantity: ++elem.quantity }
+            return { ...item, quantity: elem.quantity + 1 }
           }
           return elem
         }),
-        // Увеличиваем сумму {amount} и количество {quantity}
+        // Увеличиваем сумму {amount}
         resultCart: {
+          ...this.state.resultCart,
           amount: this.state.resultCart.amount + item.price,
-          quantity: ++this.state.resultCart.quantity,
         },
       })
     }
@@ -73,7 +73,7 @@ class Store {
       // Увеличиваем сумму {amount} и количество {quantity}
       resultCart: {
         amount: this.state.resultCart.amount + item.price,
-        quantity: ++this.state.resultCart.quantity,
+        quantity: this.state.cart.length + 1,
       },
     })
   }
@@ -92,7 +92,10 @@ class Store {
     this.setState({
       ...this.state,
       // Пересчет корзины
-      resultCart: recalculationResults(this.state.cart),
+      resultCart: {
+        amount: recalculationAmount(this.state.cart),
+        quantity: this.state.cart.length,
+      },
     })
   }
 }

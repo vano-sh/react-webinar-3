@@ -55,14 +55,12 @@ export function generateCode2() {
  * @param list {Array}
  * @returns {Object}
  */
-export function recalculationResults(list) {
+export function recalculationAmount(list) {
   let amount = 0
-  let quantity = 0
 
   list.forEach((item) => {
     amount += item.price * item.quantity
-    quantity += item.quantity
   })
 
-  return { amount, quantity }
+  return amount
 }

@@ -1,9 +1,10 @@
 import React, { useCallback, useState } from 'react'
+import PageLayout from './components/page-layout'
+import ModalLayout from './components/modal-layout'
 import List from './components/list'
 import Controls from './components/controls'
 import Head from './components/head'
-import PageLayout from './components/page-layout'
-import Modal from './components/modal'
+import Cart from './components/cart'
 
 /**
  * Приложение
@@ -33,22 +34,26 @@ function App({ store }) {
   }
 
   return (
-    <PageLayout>
-      <Head title='Магазин' />
-      <Controls
-        resultCart={resultCart}
-        onToggleModal={callbacks.onToggleModal}
-      />
-      <List list={list} onAddItemCart={callbacks.onAddItemCart} />
-      <Modal
-        cart={cart}
-        isModalActive={isModalActive}
-        resultCart={resultCart}
-        onToggleModal={callbacks.onToggleModal}
-        onAddItemCart={callbacks.onAddItemCart}
-        onDeleteItemCart={callbacks.onDeleteItemCart}
-      />
-    </PageLayout>
+    <>
+      <PageLayout>
+        <Head title='Магазин' />
+        <Controls
+          resultCart={resultCart}
+          onToggleModal={callbacks.onToggleModal}
+        />
+        <List list={list} onAddItemCart={callbacks.onAddItemCart} />
+      </PageLayout>
+      <ModalLayout isModalActive={isModalActive}>
+        <Cart
+          cart={cart}
+          isModalActive={isModalActive}
+          resultCart={resultCart}
+          onToggleModal={callbacks.onToggleModal}
+          onAddItemCart={callbacks.onAddItemCart}
+          onDeleteItemCart={callbacks.onDeleteItemCart}
+        />
+      </ModalLayout>
+    </>
   )
 }
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { plural } from '../../utils'
+import { numberWithSpaces, plural } from '../../utils'
 import { cn as bem } from '@bem-react/classname'
 import './style.css'
 
@@ -26,7 +26,9 @@ function Controls(props) {
               }
             )}`}</span>
             <span>/</span>
-            <span className={cn('amount')}>{`${props.resultCart.amount}`}</span>
+            <span className={cn('amount')}>
+              {numberWithSpaces(props.resultCart.amount)}
+            </span>
           </>
         ) : (
           <span className={cn('empty')}>пусто</span>

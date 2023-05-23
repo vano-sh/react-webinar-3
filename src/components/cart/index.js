@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import List from '../list'
+import { numberWithSpaces } from '../../utils'
 import { cn as bem } from '@bem-react/classname'
 import './style.css'
 
@@ -34,7 +35,9 @@ function Cart({
           {resultCart.quantity === 0 ? (
             <span>корзина пуста</span>
           ) : (
-            <span className={cn('amount')}>{resultCart.amount}</span>
+            <span className={cn('amount')}>
+              {numberWithSpaces(resultCart.amount)}
+            </span>
           )}
         </div>
       </div>

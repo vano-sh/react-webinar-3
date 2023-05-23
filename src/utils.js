@@ -65,6 +65,11 @@ export function recalculationAmount(list) {
   return amount
 }
 
+/**
+ * Добавление пробелов в сумме
+ * @param num {Number}
+ * @returns {String}
+ */
 export function numberWithSpaces(num) {
   return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
 }

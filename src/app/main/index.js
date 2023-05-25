@@ -7,8 +7,8 @@ import BasketTool from '../../components/basket-tool'
 import List from '../../components/list'
 import Item from '../../components/item'
 import Pagination from '../../components/pagination'
-import Product from '../../components/product'
 import { Route, Routes } from 'react-router-dom'
+import Product from '../../components/product'
 
 function Main() {
   const [page, setPage] = useState(0)
@@ -53,16 +53,15 @@ function Main() {
   }
 
   return (
-    <PageLayout head={'Магазин'}>
-      {/* <Head title='Магазин' /> */}
+    <PageLayout>
+      <Head title='Магазин' />
       <BasketTool
         onOpen={callbacks.openModalBasket}
         amount={select.amount}
         sum={select.sum}
       />
       <Routes>
-        <Route path='product/:id' element={<Product />} />
-        <Route />
+        <Route path='products/:id' element={<Product />} />
       </Routes>
       <List list={select.list} renderItem={renders.item} />
       <Pagination

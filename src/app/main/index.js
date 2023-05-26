@@ -60,6 +60,7 @@ function Main() {
         amount={select.amount}
         sum={select.sum}
       />
+      
       <Routes>
         <Route path='products/:id' element={<Product />} />
       </Routes>

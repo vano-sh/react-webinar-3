@@ -10,6 +10,8 @@ class Catalog extends StoreModule {
   initState() {
     return {
       list: [],
+      currentPage: 1,
+      limit: 10,
     }
   }
 
@@ -34,6 +36,26 @@ class Catalog extends StoreModule {
         list: json.result.items,
       },
       'Загружены товары из АПИ'
+    )
+  }
+
+  onChangePage(numPage) {
+    this.setState(
+      {
+        ...this.getState(),
+        currentPage: numPage,
+      },
+      `Номер страницы ${numPage}`
+    )
+  }
+
+  onChangeLimit(limit) {
+    this.setState(
+      {
+        ...this.getState(),
+        limit: limit,
+      },
+      `Установлен лимит ${limit}`
     )
   }
 }

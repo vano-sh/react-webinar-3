@@ -1,15 +1,15 @@
 import { memo } from 'react'
+import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { cn as bem } from '@bem-react/classname'
 import { numberFormat } from '../../utils'
 import './style.css'
-import { Link } from 'react-router-dom'
 
 function Item(props) {
   const cn = bem('Item')
 
   const callbacks = {
-    onAdd: (e) => props.onAdd(props.item._id),
+    onAdd: () => props.onAdd(props.item._id),
   }
 
   return (

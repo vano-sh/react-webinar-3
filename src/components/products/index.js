@@ -1,4 +1,4 @@
-import { memo, useCallback, useEffect, useState } from 'react'
+import { memo, useCallback, useEffect } from 'react'
 import useStore from '../../store/use-store'
 import useSelector from '../../store/use-selector'
 import List from '../../components/list'
@@ -7,20 +7,19 @@ import Pagination from '../../components/pagination'
 import PageLayout from '../page-layout'
 
 function Products() {
-  const [currentPage, setCurrentPage] = useState(1)
-  const [limit, setLimit] = useState(10) // Пригодится для пользовательского выбора кол-ва показа
-
   const store = useStore()
-
-  useEffect(() => {
-    const skip = currentPage * limit - limit
-
-    currentPage * store.actions.catalog.loadLimit(limit, skip)
-  }, [currentPage])
 
   const select = useSelector((state) => ({
     list: state.catalog.list,
+    currentPage: state.catalog.currentPage,
+    limit: state.catalog.limit,
   }))
+
+  useEffect(() => {
+    const skip = select.currentPage * select.limit - select.limit
+
+    store.actions.catalog.loadLimit(select.limit, skip)
+  }, [select.currentPage])
 
   const callbacks = {
     addToBasket: useCallback(
@@ -28,8 +27,8 @@ function Products() {
       [store]
     ),
     onChangePage: useCallback(
-      (numPage) => setCurrentPage(numPage),
-      [currentPage]
+      (numPage) => store.actions.catalog.onChangePage(numPage),
+      [select.currentPage]
     ),
   }
 
@@ -47,8 +46,8 @@ function Products() {
       <List list={select.list} renderItem={renders.item} />
       <Pagination
         length={250} // Забил жестко, т.к. по API приходит только 10
-        limit={limit}
-        currentPage={currentPage}
+        limit={select.limit}
+        currentPage={select.currentPage}
         onChangePage={callbacks.onChangePage}
       />
     </PageLayout>

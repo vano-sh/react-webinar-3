@@ -1,4 +1,4 @@
-import { memo, useEffect } from 'react'
+import { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import useStore from '../../store/use-store'
 import useSelector from '../../store/use-selector'
@@ -14,6 +14,10 @@ function Product() {
   const { id } = useParams()
 
   useEffect(() => {
+    store.actions.modals.close()
+  })
+
+  useEffect(() => {
     store.actions.product.loadProduct(id)
   }, [id])
 
@@ -21,7 +25,10 @@ function Product() {
     product: state.product.item,
   }))
 
-  console.log(select.product)
+  const callbacks = {
+    // Добавление в корзину
+    addToBasket: (_id) => store.actions.basket.addToBasket(_id),
+  }
 
   if (!select.product) return
   return (
@@ -30,26 +37,30 @@ function Product() {
         <div className={cn('description')}>{select.product.description}</div>
         <div className={cn('madeIn')}>
           <span>Страна производитель:</span>
-          <span>
+          <span className={cn('value')}>
             {` ${select.product.madeIn.title} (${select.product.madeIn.code})`}
           </span>
         </div>
         <div className={cn('category')}>
           <span>Категория:</span>
-          <span>{` ${select.product.category.title}`}</span>
+          <span
+            className={cn('value')}
+          >{` ${select.product.category.title}`}</span>
         </div>
         <div className={cn('edition')}>
           <span>Год выпуска:</span>
-          <span>{` ${select.product.edition}`}</span>
+          <span className={cn('value')}>{` ${select.product.edition}`}</span>
         </div>
         <div className={cn('price')}>
           <span>Цена:</span>
-          <span>{` ${select.product.price}`}</span>
+          <span className={cn('value')}>{` ${select.product.price} ₽`}</span>
         </div>
-        <button className={cn('btn')}>Добавить</button>
+        <button className={cn('btn')} onClick={() => callbacks.addToBasket(id)}>
+          Добавить
+        </button>
       </div>
     </PageLayout>
   )
 }
 
-export default memo(Product)
+export default Product

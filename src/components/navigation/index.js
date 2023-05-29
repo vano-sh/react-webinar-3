@@ -1,9 +1,9 @@
 import React, { memo, useCallback } from 'react'
+import { Link } from 'react-router-dom'
 import useStore from '../../store/use-store'
 import useSelector from '../../store/use-selector'
-import { Link } from 'react-router-dom'
-import BasketTool from '../basket-tool'
 import { cn as bem } from '@bem-react/classname'
+import BasketTool from '../basket-tool'
 import './style.css'
 
 function Navigation() {

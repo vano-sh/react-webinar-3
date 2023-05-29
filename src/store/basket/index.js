@@ -26,7 +26,6 @@ class Basket extends StoreModule {
       sum += result.price * result.amount
       return result
     })
-
     if (!exist) {
       // Поиск товара в каталоге, чтобы его добавить в корзину.
       // @todo В реальном приложении будет запрос к АПИ вместо поиска по состоянию.

@@ -1,10 +1,7 @@
-import { useState } from 'react'
 import { cn as bem } from '@bem-react/classname'
 import './style.css'
 
 function Pagination(props) {
-  const [currentPage, setCurrentPage] = useState(5)
-
   const cn = bem('Pagination')
 
   const numberPages = props.length / props.limit
@@ -12,7 +9,6 @@ function Pagination(props) {
   const btnPage = []
 
   const handleChangePageOnClick = (numPage) => {
-    setCurrentPage(numPage)
     props.onChangePage(numPage)
   }
 
@@ -28,17 +24,66 @@ function Pagination(props) {
     )
   }
 
-  return (
-    <div className={cn()}>
-      {btnPage[0]}
-      <span>...</span>
-      {btnPage[currentPage - 2]}
-      {btnPage[currentPage - 1]}
-      {btnPage[currentPage]}
-      <span>...</span>
-      {btnPage[numberPages - 1]}
-    </div>
-  )
+  switch (props.currentPage) {
+    case 1:
+      console.log(props.currentPage)
+      return (
+        <div className={cn()}>
+          {btnPage[props.currentPage - 2]}
+          {btnPage[props.currentPage - 1]}
+          {btnPage[props.currentPage]}
+          <span>...</span>
+          {btnPage[numberPages - 1]}
+        </div>
+      )
+    case 2:
+      console.log(props.currentPage)
+      return (
+        <div className={cn()}>
+          {btnPage[props.currentPage - 2]}
+          {btnPage[props.currentPage - 1]}
+          {btnPage[props.currentPage]}
+          <span>...</span>
+          {btnPage[numberPages - 1]}
+        </div>
+      )
+    case numberPages - 1:
+      console.log(btnPage[numberPages - 1])
+      return (
+        <div className={cn()}>
+          {btnPage[0]}
+          <span>...</span>
+          {btnPage[props.currentPage - 2]}
+          {btnPage[props.currentPage - 1]}
+          {btnPage[props.currentPage]}
+        </div>
+      )
+
+    case numberPages:
+      console.log(btnPage[numberPages - 1])
+      return (
+        <div className={cn()}>
+          {btnPage[0]}
+          <span>...</span>
+          {btnPage[props.currentPage - 2]}
+          {btnPage[props.currentPage - 1]}
+          {btnPage[props.currentPage]}
+        </div>
+      )
+
+    default:
+      return (
+        <div className={cn()}>
+          {btnPage[0]}
+          <span>...</span>
+          {btnPage[props.currentPage - 2]}
+          {btnPage[props.currentPage - 1]}
+          {btnPage[props.currentPage]}
+          <span>...</span>
+          {btnPage[numberPages - 1]}
+        </div>
+      )
+  }
 }
 
 export default Pagination

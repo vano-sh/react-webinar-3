@@ -1,5 +1,7 @@
 import { memo } from 'react'
 import PropTypes from 'prop-types'
+import Head from '../head'
+import Navigation from '../navigation'
 import { cn as bem } from '@bem-react/classname'
 import './style.css'
 
@@ -8,7 +10,8 @@ function PageLayout({ head, footer, children }) {
 
   return (
     <div className={cn()}>
-      <div className={cn('head')}>{head}</div>
+      <Head title={head} />
+      <Navigation />
       <div className={cn('center')}>{children}</div>
       <div className={cn('footer')}>{footer}</div>
     </div>

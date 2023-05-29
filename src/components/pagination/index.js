@@ -5,7 +5,7 @@ import './style.css'
 function Pagination(props) {
   const cn = bem('Pagination')
 
-  const numberPages = props.length / props.limit
+  const numberPages = Math.ceil(props.length / props.limit)
 
   const btnPage = []
 
@@ -29,9 +29,9 @@ function Pagination(props) {
     case 1:
       return (
         <div className={cn()}>
-          {btnPage[props.currentPage - 2]}
           {btnPage[props.currentPage - 1]}
           {btnPage[props.currentPage]}
+          {btnPage[props.currentPage + 1]}
           <span>...</span>
           {btnPage[numberPages - 1]}
         </div>

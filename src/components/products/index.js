@@ -14,12 +14,11 @@ function Products() {
     currentPage: state.catalog.currentPage,
     limit: state.catalog.limit,
     lang: state.language.lang,
+    count: state.catalog.count,
   }))
 
   useEffect(() => {
-    const skip = select.currentPage * select.limit - select.limit
-
-    store.actions.catalog.loadLimit(select.limit, skip)
+    store.actions.catalog.loadPage(select.limit, select.currentPage)
   }, [select.currentPage])
 
   const callbacks = {
@@ -46,7 +45,7 @@ function Products() {
     <PageLayout head={select.lang === 'ru' ? 'Магазин' : 'Shop'}>
       <List list={select.list} renderItem={renders.item} />
       <Pagination
-        length={250} // Забил жестко, т.к. по API приходит только 10
+        length={select.count} // Забил жестко, т.к. по API приходит только 10
         limit={select.limit}
         currentPage={select.currentPage}
         onChangePage={callbacks.onChangePage}

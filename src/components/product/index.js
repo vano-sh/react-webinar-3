@@ -13,21 +13,26 @@ function Product() {
 
   const { id } = useParams()
 
+  const select = useSelector((state) => ({
+    product: state.product.item,
+    currentPage: state.catalog.currentPage,
+    limit: state.catalog.limit,
+  }))
+
   useEffect(() => {
     store.actions.modals.close()
+    store.actions.catalog.loadPage(select.limit, select.currentPage)
   })
 
   useEffect(() => {
     store.actions.product.loadProduct(id)
   }, [id])
 
-  const select = useSelector((state) => ({
-    product: state.product.item,
-  }))
-
   const callbacks = {
     // Добавление в корзину
-    addToBasket: (_id) => store.actions.basket.addToBasket(_id),
+    addToBasket: (_id) => {
+      store.actions.basket.addToBasket(_id)
+    },
   }
 
   if (!select.product) return

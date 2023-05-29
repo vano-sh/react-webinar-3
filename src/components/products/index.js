@@ -1,10 +1,10 @@
 import { memo, useCallback, useEffect } from 'react'
 import useStore from '../../store/use-store'
 import useSelector from '../../store/use-selector'
+import PageLayout from '../page-layout'
 import List from '../../components/list'
 import Item from '../../components/item'
 import Pagination from '../../components/pagination'
-import PageLayout from '../page-layout'
 
 function Products() {
   const store = useStore()
@@ -13,6 +13,7 @@ function Products() {
     list: state.catalog.list,
     currentPage: state.catalog.currentPage,
     limit: state.catalog.limit,
+    lang: state.language.lang,
   }))
 
   useEffect(() => {
@@ -42,7 +43,7 @@ function Products() {
   }
 
   return (
-    <PageLayout head={'Магазин'}>
+    <PageLayout head={select.lang === 'ru' ? 'Магазин' : 'Shop'}>
       <List list={select.list} renderItem={renders.item} />
       <Pagination
         length={250} // Забил жестко, т.к. по API приходит только 10

@@ -14,6 +14,7 @@ function Navigation() {
   const select = useSelector((state) => ({
     amount: state.basket.amount,
     sum: state.basket.sum,
+    lang: state.language.lang,
   }))
 
   const callbacks = {
@@ -32,12 +33,13 @@ function Navigation() {
   return (
     <div className={cn()}>
       <div className={cn('links')}>
-        <Link to='/'>Главная</Link>
+        <Link to='/'>{select.lang === 'ru' ? 'Главная' : 'Main'}</Link>
       </div>
       <BasketTool
         onOpen={callbacks.openModalBasket}
         amount={select.amount}
         sum={select.sum}
+        lang={select.lang}
       />
     </div>
   )

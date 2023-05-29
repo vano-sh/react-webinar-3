@@ -10,6 +10,8 @@ class Store {
     /** @type {{
      * basket: Basket,
      * catalog: Catalog,
+     * product: Product,
+     * language: Language,
      * modals: Modals
      * }} */
     this.actions = {}

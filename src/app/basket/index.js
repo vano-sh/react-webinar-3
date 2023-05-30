@@ -13,6 +13,7 @@ function Basket() {
     list: state.basket.list,
     amount: state.basket.amount,
     sum: state.basket.sum,
+    lang: state.language.lang,
   }))
 
   const callbacks = {
@@ -35,7 +36,10 @@ function Basket() {
   }
 
   return (
-    <ModalLayout title='Корзина' onClose={callbacks.closeModal}>
+    <ModalLayout
+      title={select.lang === 'ru' ? 'Корзина' : 'Basket'}
+      onClose={callbacks.closeModal}
+    >
       <List list={select.list} renderItem={renders.itemBasket} />
       <BasketTotal sum={select.sum} />
     </ModalLayout>

@@ -17,6 +17,7 @@ function Product() {
     product: state.product.item,
     currentPage: state.catalog.currentPage,
     limit: state.catalog.limit,
+    lang: state.language.lang,
   }))
 
   useEffect(() => {
@@ -41,27 +42,33 @@ function Product() {
       <div className={cn()}>
         <div className={cn('description')}>{select.product.description}</div>
         <div className={cn('madeIn')}>
-          <span>Страна производитель:</span>
+          <span>
+            {select.lang === 'ru' ? 'Страна производитель:' : 'Made in:'}
+          </span>
           <span className={cn('value')}>
             {` ${select.product.madeIn.title} (${select.product.madeIn.code})`}
           </span>
         </div>
         <div className={cn('category')}>
-          <span>Категория:</span>
+          <span>{select.lang === 'ru' ? ' Категория:' : 'Category:'}</span>
           <span
             className={cn('value')}
           >{` ${select.product.category.title}`}</span>
         </div>
         <div className={cn('edition')}>
-          <span>Год выпуска:</span>
+          <span>
+            {select.lang === 'ru' ? 'Год выпуска:' : 'Year of manufacture:'}
+          </span>
           <span className={cn('value')}>{` ${select.product.edition}`}</span>
         </div>
         <div className={cn('price')}>
-          <span>Цена:</span>
-          <span className={cn('value')}>{` ${select.product.price} ₽`}</span>
+          <span>{select.lang === 'ru' ? 'Цена: ' : 'Price: '}</span>
+          <span className={cn('value')}>
+            {select.product.price} {select.lang === 'ru' ? '₽' : '$'}
+          </span>
         </div>
         <button className={cn('btn')} onClick={() => callbacks.addToBasket(id)}>
-          Добавить
+          {select.lang === 'ru' ? 'Добавить' : 'Add'}
         </button>
       </div>
     </PageLayout>

@@ -18,6 +18,10 @@ function Products() {
   }))
 
   useEffect(() => {
+    store.actions.catalog.loadCount()
+  }, [])
+
+  useEffect(() => {
     store.actions.catalog.loadPage(select.limit, select.currentPage)
   }, [select.currentPage])
 

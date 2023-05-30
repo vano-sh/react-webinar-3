@@ -1,10 +1,15 @@
 import { memo, useEffect, useRef } from 'react'
 import PropTypes from 'prop-types'
+import useSelector from '../../store/use-selector'
 import { cn as bem } from '@bem-react/classname'
 import './style.css'
 
 function ModalLayout(props) {
   const cn = bem('ModalLayout')
+
+  const select = useSelector((state) => ({
+    lang: state.language.lang,
+  }))
 
   // Корректировка центра, если модалка больше окна браузера.
   const layout = useRef()
@@ -35,7 +40,7 @@ function ModalLayout(props) {
         <div className={cn('head')}>
           <h1 className={cn('title')}>{props.title}</h1>
           <button className={cn('close')} onClick={props.onClose}>
-            Закрыть
+            {select.lang === 'ru' ? 'Закрыть' : 'Close'}
           </button>
         </div>
         <div className={cn('content')}>{props.children}</div>
